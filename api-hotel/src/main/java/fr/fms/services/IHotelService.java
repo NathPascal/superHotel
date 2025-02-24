@@ -1,5 +1,14 @@
 package fr.fms.services;
 
-public class IHotelService
+import fr.fms.dto.HotelDTO;
+
+import java.util.List;
+
+public interface IHotelService
 {
+    List<HotelDTO> getHotels();
+
+    HotelDTO getHotelById(Long id);
+
+    HotelDTO addHotel(HotelDTO hotelDTO);
 }
