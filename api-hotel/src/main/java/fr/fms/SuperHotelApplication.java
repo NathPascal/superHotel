@@ -19,7 +19,7 @@ public class SuperHotelApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception{
-		hotelRepository.save(new Hotel(null, "Première class", "0622558140", "rue des puces de lit", 0, 12, 40,"https://ac-franchise.com/wp-content/uploads/2017/04/logo-franchise-premiere-classe-1.jpg" ));
+		hotelRepository.save(new Hotel(null, "Première classe", "0622558140", "rue des puces de lit", 0, 12, 40,"https://ac-franchise.com/wp-content/uploads/2017/04/logo-franchise-premiere-classe-1.jpg" ));
 
 	}
 

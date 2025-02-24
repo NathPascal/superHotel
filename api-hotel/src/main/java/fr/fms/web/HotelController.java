@@ -28,12 +28,12 @@ public class HotelController {
     }
 
     @GetMapping("/{id}")
-    public HotelDTO getTrainingById(@PathVariable Long id) throws HotelNotFoundException {
+    public HotelDTO getHotelById(@PathVariable Long id) throws HotelNotFoundException {
         return implHotelService.getHotelById(id);
     }
 
     @PostMapping("/hotels")
-    public ResponseEntity<HotelDTO> addTraining(@RequestBody HotelDTO hotelDTO) {
+    public ResponseEntity<HotelDTO> addHotel(@RequestBody HotelDTO hotelDTO) {
         HotelDTO createdTraining = implHotelService.addHotel(hotelDTO);
         return new ResponseEntity<>(createdTraining, HttpStatus.CREATED);
     }

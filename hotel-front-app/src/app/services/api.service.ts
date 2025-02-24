@@ -18,4 +18,8 @@ export class ApiService {
   public getHotelById(id: number): Observable<Hotel> {
     return this.http.get<Hotel>(`${environment.host}/hotels/${id}`);
   }
+
+  public addHotel(hotel: Hotel): Observable<Hotel> {
+    return this.http.post<Hotel>(environment.host + "/hotels", hotel);
+  }
 }

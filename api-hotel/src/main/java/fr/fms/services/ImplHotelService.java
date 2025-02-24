@@ -50,6 +50,7 @@ public class ImplHotelService implements IHotelService{
         hotel.setStars(hotel.getStars());
         hotel.setRooms(hotel.getRooms());
         hotel.setPrice(hotel.getPrice());
+        hotel.setImageUrl(hotel.getImageUrl());
 
        Hotel savedHotel = hotelRepository.save(hotel);
         return HotelMapper.toDTO(savedHotel);

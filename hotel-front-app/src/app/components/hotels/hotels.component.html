@@ -21,7 +21,7 @@
           <tbody>
             <tr *ngFor="let hotel of listHotels">
                 <td>
-                    <a [routerLink]="['/hotel', hotel.id]">
+                    <a>
                       <img [src]="hotel.imageUrl" alt="{{ hotel.name }}" class="hotel-image">
                     </a>
                   </td>
