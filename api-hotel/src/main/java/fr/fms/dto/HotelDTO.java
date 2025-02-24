@@ -17,5 +17,6 @@ public class HotelDTO {
     private int stars;
     private int rooms;
     private double price;
+    private String imageUrl;
 
 }

@@ -1,0 +1,9 @@
+<div *ngIf="hotel">
+    <h2>{{ hotel.name }}</h2>
+    <img [src]="hotel.imageUrl" alt="{{ hotel.name }}">
+    <p>Adresse : {{ hotel.address }}</p>
+    <p>Téléphone : {{ hotel.phone }}</p>
+    <p>Étoiles : {{ hotel.stars }}</p>
+    <p>Chambres disponibles : {{ hotel.rooms }}</p>
+    <p>Prix le plus bas par nuit : {{ hotel.price }}€</p>
+  </div>

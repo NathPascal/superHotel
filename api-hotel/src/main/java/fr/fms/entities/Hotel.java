@@ -29,5 +29,6 @@ public class Hotel implements Serializable{
         private int stars;
         private int rooms;
         private double price;
+        private String imageUrl;
 
 }

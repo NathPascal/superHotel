@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super-Hotel App</title>
+  </head>
+
+  <body>
+    <div class="hotel-list container">
+      <h2>Liste des Hôtels</h2>
+      <ng-container *ngIf="listHotels">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>IMAGE</th>
+              <th>ID</th>
+              <th>NOM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let hotel of listHotels">
+                <td>
+                    <a [routerLink]="['/hotel', hotel.id]">
+                      <img [src]="hotel.imageUrl" alt="{{ hotel.name }}" class="hotel-image">
+                    </a>
+                  </td>
+              <td>{{ hotel.id }}</td>
+              <td>{{ hotel.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </body>
+</html>

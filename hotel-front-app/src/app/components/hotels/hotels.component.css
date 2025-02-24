@@ -1,0 +1,27 @@
+body {
+    background-color: #e0f7fa; /* Bleu clair */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h2 {
+    color: #00796b; /* Couleur de texte */
+  }
+  
+  .table {
+    background-color: #ffffff; /* Fond blanc pour les tables */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table th, .table td {
+    padding: 12px;
+  }
+
+  .hotel-image {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+  }
+
