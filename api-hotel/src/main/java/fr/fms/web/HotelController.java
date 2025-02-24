@@ -27,14 +27,15 @@ public class HotelController {
         return implHotelService.getHotels();
     }
 
-    @GetMapping("/{id}")
-    public HotelDTO getHotelById(@PathVariable Long id) throws HotelNotFoundException {
-        return implHotelService.getHotelById(id);
+    @GetMapping("/hotels/{id}")
+    public ResponseEntity<HotelDTO> getHotelById(@PathVariable Long id) {
+        HotelDTO hotel = implHotelService.getHotelById(id);
+        return ResponseEntity.ok(hotel);
     }
 
     @PostMapping("/hotels")
     public ResponseEntity<HotelDTO> addHotel(@RequestBody HotelDTO hotelDTO) {
-        HotelDTO createdTraining = implHotelService.addHotel(hotelDTO);
-        return new ResponseEntity<>(createdTraining, HttpStatus.CREATED);
+        HotelDTO createdHotel = implHotelService.addHotel(hotelDTO);
+        return new ResponseEntity<>(createdHotel, HttpStatus.CREATED);
     }
 }

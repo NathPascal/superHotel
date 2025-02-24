@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HotelsComponent } from './components/hotels/hotels.component';
 import { FormsModule } from '@angular/forms';
+import { DetailsHotelComponent } from './components/details-hotel/details-hotel.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HotelsComponent,
+    DetailsHotelComponent,
     
   ],
   imports: [

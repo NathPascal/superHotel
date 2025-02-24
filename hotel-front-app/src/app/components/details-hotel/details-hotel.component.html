@@ -1,0 +1,94 @@
+<!--<div class="hotel">
+    <h2>Ajouter un Hôtel</h2>
+
+    <form (ngSubmit)="onSubmit()" #hotelForm="ngForm">
+        <div class="form-group">
+            <label for="name">Nom</label>
+            <input
+                type="text"
+                id="name"
+                [(ngModel)]="hotel.name"
+                name="name"
+                required
+                class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input
+                type="text"
+                id="phone"
+                [(ngModel)]="hotel.phone"
+                name="phone"
+                required
+                class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Adresse</label>
+            <input
+                type="text"
+                id="address"
+                [(ngModel)]="hotel.address"
+                name="address"
+                required
+                class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="stars">Étoiles</label>
+            <input
+                type="number"
+                id="stars"
+                [(ngModel)]="hotel.stars"
+                name="stars"
+                required
+                class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="rooms">Chambres disponibles</label>
+            <input
+                type="number"
+                id="rooms"
+                [(ngModel)]="hotel.rooms"
+                name="rooms"
+                required
+                class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Prix le plus bas par nuit</label>
+            <input
+                type="number"
+                id="price"
+                [(ngModel)]="hotel.price"
+                name="price"
+                required
+                class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="imageUrl">URL de l'image</label>
+            <input
+                type="text"
+                id="imageUrl"
+                [(ngModel)]="hotel.imageUrl"
+                name="imageUrl"
+                required
+                class="form-control"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!hotelForm.form.valid">Ajouter</button>
+        <button type="button" class="btn btn-secondary" (click)="goBack()">Annuler</button>
+    </form>
+</div>-->
+<div *ngIf="hotel as h">
+    <h2>{{ h.name }}</h2>
+    <img [src]="h.imageUrl" alt="{{ h.name }}">
+    <p>Adresse : {{ h.address }}</p>
+    <p>Téléphone : {{ h.phone }}</p>
+    <p>Étoiles : {{ h.stars }}</p>
+    <p>Chambres disponibles : {{ h.rooms }}</p>
+    <p>Prix le plus bas par nuit : {{ h.price }}€</p>
+</div>
