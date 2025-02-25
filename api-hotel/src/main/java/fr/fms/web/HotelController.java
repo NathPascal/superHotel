@@ -1,6 +1,7 @@
 package fr.fms.web;
 
 import fr.fms.dto.HotelDTO;
+import fr.fms.entities.Hotel;
 import fr.fms.exceptions.HotelNotFoundException;
 import fr.fms.services.ImplHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,17 @@ public class HotelController {
     public ResponseEntity<HotelDTO> addHotel(@RequestBody HotelDTO hotelDTO) {
         HotelDTO createdHotel = implHotelService.addHotel(hotelDTO);
         return new ResponseEntity<>(createdHotel, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/hotels/{id}")
+    public ResponseEntity<Hotel> updateHotel(@PathVariable Long id, @RequestBody HotelDTO hotelDTO) {
+        Hotel updatedHotel = implHotelService.updateHotel(id, hotelDTO);
+        return ResponseEntity.ok(updatedHotel);
+    }
+
+    @DeleteMapping("/hotels/{id}")
+    public ResponseEntity<Void> deleteHotel(@PathVariable Long id){
+        implHotelService.deleteHotel(id);
+        return ResponseEntity.noContent().build();
     }
 }

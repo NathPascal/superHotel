@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/hotels', pathMatch: 'full' },
   {path : 'hotels', component : HotelsComponent},
   {path : 'details-hotel/:id', component: DetailsHotelComponent},
-  {path : 'hotel', component: HotelComponent}
+  {path : 'add-hotel', component: HotelComponent},
+  {path : 'update-hotel/:id', component: HotelComponent},
   
 
   

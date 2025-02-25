@@ -8,6 +8,7 @@ import fr.fms.repository.HotelRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,12 +26,13 @@ public class ImplHotelService implements IHotelService{
         this.hotelRepository = hotelRepository;
     }
 
+    //Récupère tous les hôtels
     public List<HotelDTO> getHotels() throws RuntimeException{
 
-        return HotelMapper.toDTOList(hotelRepository.findAll());
+        return HotelMapper.toDTOList(hotelRepository.findAll(Sort.by(Sort.Direction.ASC, "id")));
     }
 
-
+    // Récupère un hôtel via son id
     public HotelDTO getHotelById(Long id) {
         logger.info("Fetching hotel with id: {}", id);
         return hotelRepository.findById(id)
@@ -41,6 +43,7 @@ public class ImplHotelService implements IHotelService{
                 });
     }
 
+    //crée un nouvel hôtel
     @Override
     public HotelDTO addHotel(HotelDTO hotelDTO){
         Hotel hotel = new Hotel();
@@ -54,5 +57,33 @@ public class ImplHotelService implements IHotelService{
 
         Hotel savedHotel = hotelRepository.save(hotel);
         return HotelMapper.toDTO(savedHotel);
+    }
+
+    // Modifie un hôtel existant
+    @Override
+    public Hotel updateHotel(Long id, HotelDTO hotelDTO) {
+        return hotelRepository.findById(id)
+                .map(existingHotel -> {
+                    existingHotel.setName(hotelDTO.getName());
+                    existingHotel.setPhone(hotelDTO.getPhone());
+                    existingHotel.setAddress(hotelDTO.getAddress());
+                    existingHotel.setStars(hotelDTO.getStars());
+                    existingHotel.setRooms(hotelDTO.getRooms());
+                    existingHotel.setPrice(hotelDTO.getPrice());
+                    existingHotel.setImageUrl(hotelDTO.getImageUrl());
+                    return hotelRepository.save(existingHotel);
+                })
+                .orElseThrow(() -> new HotelNotFoundException(id));
+    }
+
+    //Supprime un hôtel existant par son ID
+    @Override
+    public void deleteHotel(Long id){
+        if (!hotelRepository.existsById(id)){
+            logger.error("Hôtel non trouvé avec l'id: {}", id);
+            throw new HotelNotFoundException(id);
+        }
+        hotelRepository.deleteById(id);
+        logger.info("Hôtel supprimé avec l'id: {}", id);
     }
 }
