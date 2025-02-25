@@ -1,22 +1,33 @@
 body {
-    background-color: #e0f7fa; /* Bleu clair */
+    background-color: #e0f7fa; 
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
   }
   
   h2 {
-    color: #00796b; /* Couleur de texte */
+    color: #00796b;
+  }
+
+  .hotel-list.container {
+   background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 8px;
   }
   
   .table {
-    background-color: #ffffff; /* Fond blanc pour les tables */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background-color: #fff;
   }
   
-  .table th, .table td {
-    padding: 12px;
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
   }
 
   .hotel-image {

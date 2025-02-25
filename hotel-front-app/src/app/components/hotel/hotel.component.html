@@ -1,0 +1,79 @@
+<div class="hotel">
+    <h2>Formulaire Hôtel</h2>
+
+    <form (ngSubmit)="onSubmit()" #hotelForm="ngForm">
+        <div class="form-group">
+            <label for="name">Nom</label>
+            <input 
+            type="text"
+            id="name"
+            [(ngModel)]="hotel.name"
+            name="name"
+            required
+            class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="phone">Téléphone :</label>
+            <input
+            type="text"
+            id="phone"
+            [(ngModel)]="hotel.phone"
+            name="phone"
+            required
+            class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="address">Adresse :</label>
+            <input
+            type="text"
+            id="address"
+            [(ngModel)]="hotel.address"
+            name="address"
+            required
+            class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="stars">Nombre d'étoiles :</label>
+            <input
+            type="number"
+            id="stars"
+            [(ngModel)]="hotel.stars"
+            name="stars"
+            required
+            class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="rooms">Nombre de chambres disponibles :</label>
+            <input 
+            type="number"
+            id="rooms"
+            [(ngModel)]="hotel.rooms"
+            name="rooms"
+            required
+            class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="price">Tarif de la chambre la moins chère</label>
+            <input
+            type="number"
+            id="price"
+            [(ngModel)]="hotel.price"
+            name="price"
+            required
+            class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="imageUrl">URL de l'image: </label>
+            <input
+            type="text"
+            id="imageUrl"
+            [(ngModel)]="hotel.imageUrl"
+            name="imageUrl"
+            required
+            class="form-control"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!hotelForm.form.valid">Ajouter</button>
+        <button type="button" class="btn btn-secondary" (click)="goBack()">Annuler</button>
+    </form>
+</div>

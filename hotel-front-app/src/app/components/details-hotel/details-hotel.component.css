@@ -1,0 +1,12 @@
+.hotel-details {
+    background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .hotel-details img {
+    width: 150px;
+    height: auto;
+    border-radius: 4px;
+  }

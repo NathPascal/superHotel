@@ -8,40 +8,7 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './details-hotel.component.html',
   styleUrls: ['./details-hotel.component.css']
 })
-//export class DetailsHotelComponent implements OnInit {
-  //hotel: Hotel = {
-   // id: 0,
-   // name: '',
-   // phone: '',
-   // address: '',
-   // stars: 0,
-   // rooms: 0,
-   // price: 0,
-   // imageUrl: ''
- // };
 
- // constructor(private router: Router, private apiService: ApiService) {}
-
- // ngOnInit(): void {}
-
- // onSubmit(): void {
-    //this.apiService.addHotel(this.hotel).subscribe({
-     // next: () => {
-       // console.log('Hôtel ajouté avec succès');
-       // this.router.navigate(['/']); // Redirige vers la liste des hôtels après l'ajout
-      //},
-      //error: (err) => {
-       // console.log('Erreur lors de l\'ajout de l\'hôtel', err);
-     // }
-   // });
- // }
-
-
-  //goBack(): void {
-   // this.router.navigate(['/']);
- // }
-
-//}
 
 export class DetailsHotelComponent implements OnInit {
   hotel: Hotel | undefined;

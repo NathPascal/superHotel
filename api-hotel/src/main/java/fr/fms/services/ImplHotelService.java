@@ -32,11 +32,11 @@ public class ImplHotelService implements IHotelService{
 
 
     public HotelDTO getHotelById(Long id) {
-        logger.info("Fetching training with id: {}", id);
+        logger.info("Fetching hotel with id: {}", id);
         return hotelRepository.findById(id)
                 .map(HotelMapper::toDTO)
                 .orElseThrow(() -> {
-                    logger.error("Training not found with id: {}", id);
+                    logger.error("Hotel not found with id: {}", id);
                     return new HotelNotFoundException(id);
                 });
     }
@@ -45,14 +45,14 @@ public class ImplHotelService implements IHotelService{
     public HotelDTO addHotel(HotelDTO hotelDTO){
         Hotel hotel = new Hotel();
         hotel.setName(hotelDTO.getName());
-        hotel.setPhone(hotel.getPhone());
-        hotel.setAddress(hotel.getAddress());
-        hotel.setStars(hotel.getStars());
-        hotel.setRooms(hotel.getRooms());
-        hotel.setPrice(hotel.getPrice());
-        hotel.setImageUrl(hotel.getImageUrl());
+        hotel.setPhone(hotelDTO.getPhone());
+        hotel.setAddress(hotelDTO.getAddress());
+        hotel.setStars(hotelDTO.getStars());
+        hotel.setRooms(hotelDTO.getRooms());
+        hotel.setPrice(hotelDTO.getPrice());
+        hotel.setImageUrl(hotelDTO.getImageUrl());
 
-       Hotel savedHotel = hotelRepository.save(hotel);
+        Hotel savedHotel = hotelRepository.save(hotel);
         return HotelMapper.toDTO(savedHotel);
     }
 }
