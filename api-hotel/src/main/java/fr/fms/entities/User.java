@@ -1,12 +1,10 @@
 package fr.fms.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @ToString
@@ -15,8 +13,8 @@ import java.util.List;
 @Data
 @Getter
 @Setter
-@Table(name = "T_city")
-public class City implements Serializable {
+@Table(name = "T_user")
+public class User implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -24,10 +22,8 @@ public class City implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String username;
+    private String password;
+    boolean active;
 
-    private String name;
-
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private List<Hotel> hotels;
 }
