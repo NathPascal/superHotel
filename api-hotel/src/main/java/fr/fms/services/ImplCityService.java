@@ -11,8 +11,10 @@ import java.util.List;
 @Service
 public class ImplCityService implements ICityService {
 
+    private final CityRepository cityRepository;
+
     @Autowired
-    private CityRepository cityRepository;
+    public ImplCityService(CityRepository cityRepository) {this.cityRepository = cityRepository;}
 
     public List<City> getAllCities(){
         return cityRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));

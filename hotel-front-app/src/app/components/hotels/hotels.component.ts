@@ -28,6 +28,8 @@ export class HotelsComponent implements OnInit {
     this.getCities();
     this.updateHotelList();
     this.isLoggedIn = this.authService.isLoggedIn;
+
+    this.filteredHotels = this.listHotels;
   }
 
   // Filtrer les hôtels par ville

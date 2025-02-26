@@ -23,14 +23,13 @@ public class ImplHotelService implements IHotelService{
     private final Logger logger = LoggerFactory.getLogger(ImplHotelService.class);
 
     private final HotelRepository hotelRepository;
-
-    @Autowired
-    public ImplHotelService(HotelRepository hotelRepository){
-        this.hotelRepository = hotelRepository;
-    }
-
-    @Autowired
     private CityRepository cityRepository;
+
+    @Autowired
+    public ImplHotelService(HotelRepository hotelRepository, CityRepository cityRepository){
+        this.hotelRepository = hotelRepository;
+        this.cityRepository = cityRepository;
+    }
 
     //Récupère tous les hôtels
     public List<HotelDTO> getHotels() throws RuntimeException{
@@ -47,6 +46,11 @@ public class ImplHotelService implements IHotelService{
                     logger.error("Hotel not found with id: {}", id);
                     return new HotelNotFoundException(id);
                 });
+    }
+
+    // Récupère les hôtels par ville
+    public List<HotelDTO> getHotelsByCityId(Long cityId) {
+        return HotelMapper.toDTOList(hotelRepository.findByCityId(cityId));
     }
 
     //crée un nouvel hôtel

@@ -14,8 +14,10 @@ import java.util.List;
 @RequestMapping("/api")
 public class CityController {
 
+    private final ImplCityService implCityService;
+
     @Autowired
-    private ImplCityService implCityService;
+    public CityController(ImplCityService implCityService) {this.implCityService = implCityService;}
 
     @GetMapping("/cities")
     public List<City> getAllCities(){
