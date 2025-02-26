@@ -1,5 +1,6 @@
 package fr.fms.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,5 +31,10 @@ public class Hotel implements Serializable{
         private int rooms;
         private double price;
         private String imageUrl;
+
+        @ManyToOne
+        @JoinColumn(name = "city_id")
+        @JsonBackReference
+        private City city;
 
 }
