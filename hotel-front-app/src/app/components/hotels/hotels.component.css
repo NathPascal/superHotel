@@ -1,38 +1,107 @@
 body {
-    background-color: #e0f7fa; 
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  h2 {
-    color: #00796b;
-  }
+  background-color: #e0f7fa;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-  .hotel-list.container {
-   background-color: #e0f7fa;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  .table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-    background-color: #fff;
-  }
-  
-  .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-  
-  .table-hover tbody tr:hover {
-    background-color: rgba(0, 0, 0, 0.075);
-  }
+h2 {
+  color: #00796b;
+}
 
-  .hotel-image {
-    width: 100px;
-    height: auto;
-    cursor: pointer;
-  }
+.hotel-list.container {
+  background-color: #e0f7fa;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
 
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.header img {
+  width: 50px;
+  height: auto;
+  margin-left: 10px;
+}
+
+.hotel-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.hotel-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 300px;
+}
+
+.hotel-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.hotel-info {
+  padding: 15px;
+}
+
+.hotel-info h3 {
+  margin: 0 0 10px;
+  color: #00796b;
+}
+
+.hotel-info p {
+  margin: 0 0 15px;
+  color: #555;
+}
+
+.hotel-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cities-filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.city-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  width: 150px; /* Ajustez la taille selon vos besoins */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.city-card-content {
+  padding: 10px;
+}
+
+.city-card-content h4 {
+  margin: 0;
+  color: #00796b;
+}
+
+.city-card-content h4 {
+  margin: 0;
+  color: #00796b;
+}

@@ -18,9 +18,7 @@ export class HotelsComponent implements OnInit {
   error = null; 
   isLoggedIn: boolean = false;
 
- // @Input() Cities: City[] | undefined = [];
- // @Output() newItemEvent = new EventEmitter<number>();
-
+  isLoading: boolean = false;
 
   constructor(private apiService: ApiService, private router: Router, private authService: AuthService){}
 
@@ -31,10 +29,35 @@ export class HotelsComponent implements OnInit {
 
   }
 
-  filterCities(id: number) {
-    this.selectedCityId = id;
-    this.getHotelsByCity(id);
+  //Sélection des hôtels par ville
+  
+ filterCities(id: number | string) {
+  this.selectedCityId = id === 'all' ? null : (id as number);
+  this.updateHotelList();
+ }
+
+ private updateHotelList(){
+  if (this.selectedCityId) {
+    this.apiService.getHotelsByCity(this.selectedCityId).subscribe({
+      next: (hotels) => this.listHotels = hotels,
+      error: (err) => console.error(err)
+    });
+  } else {
+    this.getHotels();
   }
+ }
+
+ getHotelsByCity(cityId: number) {
+  this.apiService.getHotelsByCity(cityId).subscribe({
+    next: (hotels) => {
+      this.listHotels = hotels;
+    },
+    error: (err) => {
+      console.log('Erreur lors de la récupération des hôtels pour la ville', err);
+    }
+   
+  });
+}
 
 
   //Récupère tous les hôtels depuis l'API
@@ -64,51 +87,8 @@ export class HotelsComponent implements OnInit {
   // fonction pour obtenir le nom de la ville par son Id
   getCityNameById(cityId: number | null): string {
     const city = this.listCities.find(c => c.id === cityId);
-    console.log('Ville trouvée pour ID', cityId, ':', city?.name);
     return city ? city.name : 'Ville inconnue';
 }
-
-getHotelsByCity(cityId: number) {
-  this.apiService.getHotelsByCity(cityId).subscribe({
-    next: (hotels) => {
-      this.listHotels = hotels;
-    },
-    error: (err) => {
-      console.log('Erreur lors de la récupération des hôtels pour la ville', err);
-    }
-   
-  });
-}
-
-
-  //Filtre les hôtels par ville
-  //filterByCity(cityId: number | null): void {
-
-   // if (cityId) {
-     // this.apiService.getHotelsByCity(cityId).subscribe({
-      //  next: (hotels: Hotel[]) =>{
-       //   this.listHotels = hotels;
-
-      //console.log('Hôtels filtrés par ville:', this.listHotels); //log
-      //  },
-       // error: (err: any) => {
-        //  console.log('Erreur lors du filtrage des hôtels par ville', err);
-       // }     
-     // });
-   // }else {
-    //  this.getHotels(); 
-   // }
-  //}
-
- // onCityFilterChange(event: Event): void {
-   // const selectElement = event.target as HTMLSelectElement;
-   // const cityId = selectElement.value? +selectElement.value : null;
-
-   // console.log('Changement de ville sélectionnée: ', cityId);//log
-
-   // this.filterByCity(cityId);
- // }
-
 
 
   //Redirige vers la page d'ajout d'un hôtel

@@ -7,6 +7,7 @@ import { CitiesComponent } from './components/cities/cities.component';
 import { CityFormComponent } from './components/city-form/city-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 
@@ -14,11 +15,11 @@ const routes: Routes = [
   {path: '', redirectTo: '/hotels', pathMatch: 'full' },
   {path : 'hotels', component : HotelsComponent},
   {path : 'details-hotel/:id', component: DetailsHotelComponent},
-  {path : 'add-hotel', component: HotelComponent},
-  {path : 'update-hotel/:id', component: HotelComponent},
-  {path: 'cities', component: CitiesComponent},
-  {path: 'add-city', component: CityFormComponent},
-  {path: 'update-city/:id', component: CityFormComponent},
+  {path : 'add-hotel', component: HotelComponent, canActivate: [AuthGuard]},
+  {path : 'update-hotel/:id', component: HotelComponent, canActivate: [AuthGuard]},
+  {path: 'cities', component: CitiesComponent, canActivate: [AuthGuard]},
+  {path: 'add-city', component: CityFormComponent, canActivate: [AuthGuard]},
+  {path: 'update-city/:id', component: CityFormComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent}
    

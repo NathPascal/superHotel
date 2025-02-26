@@ -74,4 +74,9 @@ getCities(): void {
   });
 }
 
+//Retour à la liste des hôtels
+goBack():void{
+  this.router.navigateByUrl('/hotels');
+}
+
 }

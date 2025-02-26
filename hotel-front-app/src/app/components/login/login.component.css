@@ -1,0 +1,84 @@
+body {
+    background-color: #e0f7fa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #FormLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e0f7fa;
+  }
+  
+  #FormLoginTop {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #FormLoginTop h1 {
+    color: #00796b;
+  }
+  
+  .login-form-info {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .field {
+    margin-bottom: 15px;
+  }
+  
+  .field label {
+    display: block;
+    margin-bottom: 5px;
+    color: #00796b;
+  }
+  
+  .field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button-return,
+  .button-confirm {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button-return {
+    background-color: #757575;
+    color: #fff;
+  }
+  
+  .button-return:hover {
+    background-color: #616161;
+  }
+  
+  .button-confirm {
+    background-color: #00796b;
+    color: #fff;
+  }
+  
+  .button-confirm:hover {
+    background-color: #004d40;
+  }

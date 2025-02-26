@@ -1,29 +1,20 @@
 <div class="cities-list container">
     <h2>Liste des Villes</h2>
-
     <div class="mb-3">
-        <button class="btn btn-success" (click)="onAddCity()">Ajouter une ville</button>
-        <button type="button" class="btn btn-secondary" (click)="goBack()">Retour</button>
+      <button class="btn btn-success" (click)="onAddCity()">Ajouter une ville</button>
+      <button type="button" class="btn btn-secondary" (click)="goBack()">Retour</button>
     </div>
-
     <ng-container *ngIf="listCities?.length">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>NOM</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let city of listCities">
-                    <td>{{city.id}}</td>
-                    <td>{{city.name}}</td>
-                    <td>
-                        <button class="btn btn-warning btn-sm-2" (click)="onUpdateCity(city.id)">Modifier</button>
-                        <button class="btn btn-danger btn-sm" (click)="onDeleteCity(city.id)">Supprimer</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+      <div class="city-cards">
+        <div class="city-card" *ngFor="let city of listCities">
+          <div class="city-card-content">
+            <h4>{{ city.name }}</h4>
+            <div class="city-actions">
+              <button class="btn btn-warning btn-sm" (click)="onUpdateCity(city.id)">Modifier</button>
+              <button class="btn btn-danger btn-sm" (click)="onDeleteCity(city.id)">Supprimer</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </ng-container>
-</div>
+  </div>

@@ -5,65 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Super-Hotel App</title>
   </head>
-
   <body>
     <div class="hotel-list container">
-      <h2>Liste des Hôtels</h2>
+      <h2>BIENVENUE sur Super-Hotel.fr</h2>
       <div class="header">
         <img *ngIf="isLoggedIn" src="assets/Logout.png" alt="Power Icon" routerLink="/logout">
         <img *ngIf="!isLoggedIn" src="assets/Login.png" alt="Power Icon" routerLink="/login">
-    </div>
-
-
-      <div class="mb-3" d-flex justify-content-between align-items-center>
-        <button class="btn btn-success" (click)="onAddHotel()">Ajouter un Hôtel</button>
-        <button class="btn btn-info" (click)="goToDashboard()">Tableau de bord des villes</button>
       </div>
-
-     <!--<div class="mb-3">
-        <label for="cityFilter" class="form-label">Sélectionner une ville :</label>
-        <select id="cityFilter" class="form-select" (change)="onCityFilterChange($event)">
-          <option value="">Toutes les villes</option>
-          <option *ngFor="let city of listCities" [value]="city.id">{{ city.name }}</option>
-        </select>
-      </div> -->
-
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+        <button class="btn btn-success" *ngIf="isLoggedIn" (click)="onAddHotel()">Ajouter un Hôtel</button>
+        <button class="btn btn-info" *ngIf="isLoggedIn" (click)="goToDashboard()">Tableau de bord des villes</button>
+      </div>
       <ul class="cities-filter-container">
-        <li *ngFor="let city of listCities">
-          <button class="cities-filter-btn" (click)="filterCities(city.id)">
-            {{ city.name }}
-          </button>
+        <li class="city-card">
+          <div class="city-card-content" (click)="filterCities('all')">
+            <h4>Toutes les villes</h4>
+          </div>
+        </li>
+        <li *ngFor="let city of listCities" class="city-card">
+          <div class="city-card-content" (click)="filterCities(city.id)">
+            <h4>{{ city.name }}</h4>
+          </div>
         </li>
       </ul>
       
-
       <ng-container *ngIf="listHotels">
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>IMAGE</th>
-              <th>ID</th>
-              <th>NOM</th>
-              <th>VILLE</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let hotel of listHotels">
-                <td>
-                    <a [routerLink]="['/details-hotel', hotel.id]">
-                      <img [src]="hotel.imageUrl" alt="{{ hotel.name }}" class="hotel-image">
-                    </a>
-                  </td>
-              <td>{{ hotel.id }}</td>
-              <td>{{ hotel.name }}</td>
-              <td>{{ getCityNameById(hotel.cityId) }}</td>
-              <td>
-                <button class="btn btn-warning btn-sm me-2" (click)="onUpdateHotel(hotel.id)">Modifier</button>
-                <button class="btn btn-danger btn-sm" (click)="onDeleteHotel(hotel.id)">Supprimer</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="hotel-cards">
+          <div class="hotel-card" *ngFor="let hotel of listHotels">
+            <a [routerLink]="['/details-hotel', hotel.id]">
+              <img [src]="hotel.imageUrl" alt="{{ hotel.name }}" class="hotel-image">
+            </a>
+            <div class="hotel-info">
+              <h3>{{ hotel.name }}</h3>
+              <p>{{ getCityNameById(hotel.cityId) }}</p>
+              <div class="hotel-actions">
+                <button class="btn btn-warning btn-sm me-2" *ngIf="isLoggedIn" (click)="onUpdateHotel(hotel.id)">Modifier</button>
+                <button class="btn btn-danger btn-sm" *ngIf="isLoggedIn" (click)="onDeleteHotel(hotel.id)">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </ng-container>
     </div>
   </body>

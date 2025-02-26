@@ -1,23 +1,25 @@
-<div class="container">
-    <h2>{{ isUpdateMode ? 'Modifier' : 'Ajouter' }} une ville</h2>
-
-    <form (ngSubmit)="onSubmit()" #cityForm="ngForm">
-        <div class="mb-3">
-            <label for="name" class="form-label">Nom de la ville</label>
-            <input
-                type="text"
-                id="name"
-                [(ngModel)]="city.name"
-                name="name"
-                required
-                class="form-control"
-                placeholder="Entrez le nom de la ville"
-            />
+<div class="city-form-container">
+    <div class="city-form">
+      <h2>{{ isUpdateMode ? 'Modifier' : 'Ajouter' }} une ville</h2>
+      <form (ngSubmit)="onSubmit()" #cityForm="ngForm">
+        <div class="form-group">
+          <label for="name" class="form-label">Nom de la ville</label>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="city.name"
+            name="name"
+            required
+            class="form-control"
+            placeholder="Entrez le nom de la ville"
+          />
         </div>
-
-        <button type="submit" class="btn btn-primary" [disabled]="!cityForm.form.valid">
+        <div class="form-buttons">
+          <button type="submit" class="btn btn-primary" [disabled]="!cityForm.form.valid">
             {{ isUpdateMode ? 'Mettre à jour' : 'Ajouter'}}
-        </button>
-        <button type="button" class="btn btn-secondary ms-2" (click)="goBack()">Annuler</button>
-    </form>
-</div>
+          </button>
+          <button type="button" class="btn btn-secondary ms-2" (click)="goBack()">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
