@@ -10,6 +10,8 @@ import { DetailsHotelComponent } from './components/details-hotel/details-hotel.
 import { HotelComponent } from './components/hotel/hotel.component';
 import { CitiesComponent } from './components/cities/cities.component';
 import { CityFormComponent } from './components/city-form/city-form.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { CityFormComponent } from './components/city-form/city-form.component';
     DetailsHotelComponent,
     HotelComponent,
     CitiesComponent,
-    CityFormComponent
+    CityFormComponent,
+    LoginComponent,
+    LogoutComponent
    
     
   ],

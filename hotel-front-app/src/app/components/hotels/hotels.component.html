@@ -9,6 +9,11 @@
   <body>
     <div class="hotel-list container">
       <h2>Liste des Hôtels</h2>
+      <div class="header">
+        <img *ngIf="isLoggedIn" src="assets/Logout.png" alt="Power Icon" routerLink="/logout">
+        <img *ngIf="!isLoggedIn" src="assets/Login.png" alt="Power Icon" routerLink="/login">
+    </div>
+
 
       <div class="mb-3" d-flex justify-content-between align-items-center>
         <button class="btn btn-success" (click)="onAddHotel()">Ajouter un Hôtel</button>

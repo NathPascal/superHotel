@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { City } from 'src/app/models/city.model';
 import { Hotel } from 'src/app/models/hotel.model';
 import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-hotels',
@@ -15,16 +16,18 @@ export class HotelsComponent implements OnInit {
   listCities: City[] = [];
   selectedCityId: number | null = null;
   error = null; 
+  isLoggedIn: boolean = false;
 
  // @Input() Cities: City[] | undefined = [];
  // @Output() newItemEvent = new EventEmitter<number>();
 
 
-  constructor(private apiService: ApiService, private router: Router){}
+  constructor(private apiService: ApiService, private router: Router, private authService: AuthService){}
 
   ngOnInit(): void {
       this.getHotels();
       this.getCities();
+      this.isLoggedIn = this.authService.isLoggedIn;
 
   }
 
