@@ -1,3 +1,5 @@
+import { City } from "./city.model";
+
 export class Hotel {
     id : number;
     name : string
@@ -7,10 +9,11 @@ export class Hotel {
     rooms : number;
     price : number;
     imageUrl : string;
+    cityId : number | null;
 
     
   
-    constructor(id:number,name:string,phone:string,address:string,stars:number,rooms:number,price:number,imageUrl:string){
+    constructor(id:number,name:string,phone:string,address:string,stars:number,rooms:number,price:number,imageUrl:string, cityId: number){
       this.id = id;
       this.name = name
       this.phone = phone;
@@ -19,5 +22,6 @@ export class Hotel {
       this.rooms = rooms;
       this.price = price;
       this.imageUrl = imageUrl;
+      this.cityId = cityId;
       }
     }

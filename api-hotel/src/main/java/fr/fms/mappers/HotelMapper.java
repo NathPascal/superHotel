@@ -22,6 +22,7 @@ public class HotelMapper {
         dto.setRooms(hotel.getRooms());
         dto.setPrice(hotel.getPrice());
         dto.setImageUrl(hotel.getImageUrl());
+        dto.setCityId(hotel.getCity() != null ? hotel.getCity().getId() : null);
         return dto;
     }
 

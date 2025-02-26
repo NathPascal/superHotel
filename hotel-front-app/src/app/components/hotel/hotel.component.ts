@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { City } from 'src/app/models/city.model';
 import { Hotel } from 'src/app/models/hotel.model';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -18,20 +19,35 @@ export class HotelComponent implements OnInit {
     stars: 0,
     rooms: 0,
     price: 0,
-    imageUrl: ''
+    imageUrl: '',
+    cityId: null
   };
 
+  listCities : City[] = [];
   isUpdateMode: boolean = false; 
 
   constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute){}
 
   ngOnInit(): void { 
+    this.getCities();
+
     // Vérifie si un ID est présent dans l'URL pour basculer en mode update
     const hotelID = this.route.snapshot.paramMap.get('id');
     if (hotelID){
       this.isUpdateMode = true;
       this.getHotelById(+hotelID);
     }
+  }
+
+  getCities(): void {
+    this.apiService.getCities().subscribe({
+      next: (cities) => {
+        this.listCities = cities;
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération des villes', err);
+      }
+    });
   }
 
   //Récupère les données de l'hôtel en mode update

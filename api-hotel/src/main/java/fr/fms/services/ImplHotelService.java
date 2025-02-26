@@ -1,9 +1,12 @@
 package fr.fms.services;
 
 import fr.fms.dto.HotelDTO;
+import fr.fms.entities.City;
 import fr.fms.entities.Hotel;
 import fr.fms.exceptions.HotelNotFoundException;
+import fr.fms.exceptions.ResourceNotFoundException;
 import fr.fms.mappers.HotelMapper;
+import fr.fms.repository.CityRepository;
 import fr.fms.repository.HotelRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +28,9 @@ public class ImplHotelService implements IHotelService{
     public ImplHotelService(HotelRepository hotelRepository){
         this.hotelRepository = hotelRepository;
     }
+
+    @Autowired
+    private CityRepository cityRepository;
 
     //Récupère tous les hôtels
     public List<HotelDTO> getHotels() throws RuntimeException{
@@ -55,6 +61,14 @@ public class ImplHotelService implements IHotelService{
         hotel.setPrice(hotelDTO.getPrice());
         hotel.setImageUrl(hotelDTO.getImageUrl());
 
+        if (hotelDTO.getCityId() != null) {
+            City city = cityRepository.findById(hotelDTO.getCityId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Ville non trouvée"));
+            hotel.setCity(city);
+        }
+
+        logger.info("City ID received: {}", hotelDTO.getCityId());
+
         Hotel savedHotel = hotelRepository.save(hotel);
         return HotelMapper.toDTO(savedHotel);
     }
@@ -71,6 +85,12 @@ public class ImplHotelService implements IHotelService{
                     existingHotel.setRooms(hotelDTO.getRooms());
                     existingHotel.setPrice(hotelDTO.getPrice());
                     existingHotel.setImageUrl(hotelDTO.getImageUrl());
+
+                    if (hotelDTO.getCityId() != null){
+                        City city = cityRepository.findById(hotelDTO.getCityId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Ville non trouvée"));
+                        existingHotel.setCity(city);
+                    }
                     return hotelRepository.save(existingHotel);
                 })
                 .orElseThrow(() -> new HotelNotFoundException(id));

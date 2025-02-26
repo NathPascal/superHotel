@@ -3,6 +3,7 @@ import { Hotel } from '../models/hotel.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { City } from '../models/city.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +36,35 @@ export class ApiService {
   public deleteHotel(id: number): Observable<void> {
     return this.http.delete<void>(`${environment.host}/hotels/${id}`);
   }
+
+  //Récupère toutes les villes
+  public getCities(){
+    return this.http.get<City[]>(environment.host+"/cities");
+  }
+
+  //Récupère une ville par ID
+  public getCityById(id: number): Observable<City> {
+    return this.http.get<City>(`${environment.host}/cities/${id}`);
+  } 
+
+  //ajout d'une nouvelle ville
+  public addCity(city: City): Observable<City> {
+    return this.http.post<City>(environment.host + "/cities", city);
+  }
+
+  // Met à jour une ville existant
+  public updateCity(id: number, city: City): Observable<City> {
+    return this.http.put<City>(`${environment.host}/cities/${id}`, city);
+  }
+
+  //Supprime une ville par ID
+  public deleteCity(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.host}/cities/${id}`);
+  }
+
+  //Relation entre ville et hotel
+  public getHotelsByCity(cityId: number): Observable<Hotel[]> {
+    return this.http.get<Hotel[]>(`${environment.host}/hotels?cityId=${cityId}`);
+  }
+
 }

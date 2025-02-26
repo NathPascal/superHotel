@@ -1,5 +1,6 @@
 package fr.fms.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @Getter
@@ -18,5 +19,8 @@ public class HotelDTO {
     private int rooms;
     private double price;
     private String imageUrl;
+
+    @JsonProperty("cityId")
+    private Long cityId;
 
 }

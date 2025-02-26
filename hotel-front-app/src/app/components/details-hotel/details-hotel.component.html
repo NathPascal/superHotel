@@ -1,9 +1,10 @@
-<div *ngIf="hotel as h" class="hotel-details">
-    <h2>{{ h.name }}</h2>
-    <img [src]="h.imageUrl" alt="{{ h.name }}">
-    <p>Adresse : {{ h.address }}</p>
-    <p>Téléphone : {{ h.phone }}</p>
-    <p>Étoiles : {{ h.stars }}</p>
-    <p>Chambres disponibles : {{ h.rooms }}</p>
-    <p>Prix le plus bas par nuit : {{ h.price }}€</p>
+<div *ngIf="hotel" class="hotel-details">
+    <h2>{{ hotel.name }}</h2>
+    <img [src]="hotel.imageUrl" alt="{{ hotel.name }}">
+    <p>Adresse : {{ hotel.address }}</p>
+    <p>Téléphone : {{ hotel.phone }}</p>
+    <p>Étoiles : {{ hotel.stars }}</p>
+    <p>Chambres disponibles : {{ hotel.rooms }}</p>
+    <p>Prix le plus bas par nuit : {{ hotel.price }}€</p>
+    <p>Ville : {{ getCityNameById(hotel.cityId) }}</p>
 </div>

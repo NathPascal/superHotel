@@ -3,6 +3,7 @@ package fr.fms.web;
 import fr.fms.dto.HotelDTO;
 import fr.fms.entities.Hotel;
 import fr.fms.exceptions.HotelNotFoundException;
+import fr.fms.repository.CityRepository;
 import fr.fms.services.ImplHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,9 @@ public class HotelController {
     public HotelController(ImplHotelService implHotelService) {
         this.implHotelService = implHotelService;
     }
+
+    @Autowired
+    private CityRepository cityRepository;
 
     @GetMapping("/hotels")
     public List<HotelDTO> allHotels() {

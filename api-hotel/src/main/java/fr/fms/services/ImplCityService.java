@@ -3,6 +3,7 @@ package fr.fms.services;
 import fr.fms.entities.City;
 import fr.fms.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class ImplCityService implements ICityService {
     private CityRepository cityRepository;
 
     public List<City> getAllCities(){
-        return cityRepository.findAll();
+        return cityRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     public City getCityById(Long id) {
