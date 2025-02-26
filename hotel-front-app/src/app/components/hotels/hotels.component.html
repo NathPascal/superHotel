@@ -28,10 +28,12 @@
           </div>
         </li>
       </ul>
+
+      <app-search-bar (search)="onSearch($event)"></app-search-bar>
       
-      <ng-container *ngIf="listHotels">
+      <ng-container *ngIf="filteredHotels">
         <div class="hotel-cards">
-          <div class="hotel-card" *ngFor="let hotel of listHotels">
+          <div class="hotel-card" *ngFor="let hotel of filteredHotels">
             <a [routerLink]="['/details-hotel', hotel.id]">
               <img [src]="hotel.imageUrl" alt="{{ hotel.name }}" class="hotel-image">
             </a>

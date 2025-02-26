@@ -12,6 +12,7 @@ import { CitiesComponent } from './components/cities/cities.component';
 import { CityFormComponent } from './components/city-form/city-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     CitiesComponent,
     CityFormComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    SearchBarComponent
    
     
   ],

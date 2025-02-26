@@ -12,111 +12,96 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HotelsComponent implements OnInit {
 
-  listHotels : Hotel[] = [];
+  listHotels: Hotel[] = [];
   listCities: City[] = [];
+  filteredHotels: Hotel[] = [];
   selectedCityId: number | null = null;
-  error = null; 
   isLoggedIn: boolean = false;
 
-  isLoading: boolean = false;
-
-  constructor(private apiService: ApiService, private router: Router, private authService: AuthService){}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-      this.getHotels();
-      this.getCities();
-      this.isLoggedIn = this.authService.isLoggedIn;
-
+    this.getCities();
+    this.updateHotelList();
+    this.isLoggedIn = this.authService.isLoggedIn;
   }
 
-  //Sélection des hôtels par ville
-  
- filterCities(id: number | string) {
-  this.selectedCityId = id === 'all' ? null : (id as number);
-  this.updateHotelList();
- }
-
- private updateHotelList(){
-  if (this.selectedCityId) {
-    this.apiService.getHotelsByCity(this.selectedCityId).subscribe({
-      next: (hotels) => this.listHotels = hotels,
-      error: (err) => console.error(err)
-    });
-  } else {
-    this.getHotels();
+  // Filtrer les hôtels par ville
+  filterCities(id: number | string) {
+    this.selectedCityId = id === 'all' ? null : (id as number);
+    this.updateHotelList();
   }
- }
 
- getHotelsByCity(cityId: number) {
-  this.apiService.getHotelsByCity(cityId).subscribe({
-    next: (hotels) => {
-      this.listHotels = hotels;
-    },
-    error: (err) => {
-      console.log('Erreur lors de la récupération des hôtels pour la ville', err);
+  // Mise à jour de la liste des hôtels
+  private updateHotelList() {
+    if (this.selectedCityId !== null) {
+      this.apiService.getHotelsByCity(this.selectedCityId).subscribe({
+        next: (hotels) => {
+          this.listHotels = hotels;
+          this.filteredHotels = hotels;
+        },
+        error: (err) => console.error(err)
+      });
+    } else {
+      this.apiService.getHotels().subscribe({
+        next: (hotels) => {
+          this.listHotels = hotels;
+          this.filteredHotels = hotels;
+        },
+        error: (err) => console.error(err)
+      });
     }
-   
-  });
-}
-
-
-  //Récupère tous les hôtels depuis l'API
-  getHotels(): void {
-    this.apiService.getHotels().subscribe({
-      next: (hotels) => {
-        this.listHotels = hotels;
-      },
-      error: (err) => {
-        console.log('Erreur lors de la récupération des hôtels', err);
-      }
-    });
+  }
+  // Barre de recherche
+  onSearch(query: string) {
+    const searchTerm = query.toLowerCase();
+    this.filteredHotels = this.listHotels.filter(hotel => 
+      hotel.name.toLowerCase().includes(searchTerm) ||
+      this.getCityNameById(hotel.cityId).toLowerCase().includes(searchTerm)
+    );
   }
 
-  //Récupère toutes les villes depuis l'API
+  // Récupération des villes
   getCities(): void {
     this.apiService.getCities().subscribe({
       next: (cities) => {
         this.listCities = cities;
       },
-      error: (err) => {
-        console.log('Erreur lors de la récupération des villes', err);
-      }
+      error: (err) => console.error('Erreur lors de la récupération des villes', err)
     });
   }
 
-  // fonction pour obtenir le nom de la ville par son Id
+  // Obtenir le nom de la ville par ID
   getCityNameById(cityId: number | null): string {
-    const city = this.listCities.find(c => c.id === cityId);
-    return city ? city.name : 'Ville inconnue';
-}
+    return this.listCities.find(city => city.id === cityId)?.name ?? 'Ville inconnue';
+  }
 
-
-  //Redirige vers la page d'ajout d'un hôtel
+  // Redirections
   onAddHotel(): void {
     this.router.navigateByUrl('/add-hotel');
   }
 
-  //Redirige vers la page de modification d'un hôtel
-  onUpdateHotel(id:number):void{
+  onUpdateHotel(id: number): void {
     this.router.navigate(['update-hotel', id]);
   }
 
-  //Supprime un hôtel via l'API
-  onDeleteHotel(id:number): void {
-    if (confirm('Etes-vous sûr de vouloir supprimer cet hôtel?')){
+  // Suppression d'un hôtel
+  onDeleteHotel(id: number): void {
+    if (confirm('Etes-vous sûr de vouloir supprimer cet hôtel ?')) {
       this.apiService.deleteHotel(id).subscribe({
         next: () => {
           alert('Hôtel supprimé avec succès');
-          this.getHotels();
+          this.updateHotelList();
         },
-        error: (err: any) => {
-          console.error('Erreur lors de la suppression de l\'hôtel', err);
-        }
+        error: (err) => console.error('Erreur lors de la suppression de l\'hôtel', err)
       });
     }
   }
 
-  // Redirige vers la page des villes
   goToDashboard(): void {
     this.router.navigateByUrl('/cities');
   }

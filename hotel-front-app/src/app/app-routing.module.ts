@@ -8,6 +8,7 @@ import { CityFormComponent } from './components/city-form/city-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { AuthGuard } from './guards/auth.guard';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 
 
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'add-city', component: CityFormComponent, canActivate: [AuthGuard]},
   {path: 'update-city/:id', component: CityFormComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'logout', component: LogoutComponent}
+  {path: 'logout', component: LogoutComponent},
+  {path: 'searchbar', component: SearchBarComponent}
    
 ];
 
