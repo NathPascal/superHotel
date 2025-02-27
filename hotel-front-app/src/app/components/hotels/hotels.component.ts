@@ -58,6 +58,7 @@ export class HotelsComponent implements OnInit {
       });
     }
   }
+  
   // Barre de recherche
   onSearch(query: string) {
     const searchTerm = query.toLowerCase();

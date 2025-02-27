@@ -27,6 +27,7 @@ public class ImplCityService implements ICityService {
     public City addCity(City city) {
         return cityRepository.save(city);
     }
+
     public City updateCity(Long id, City city){
         return  cityRepository.findById(id).map(existingCity ->{
             existingCity.setName(city.getName());

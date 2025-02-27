@@ -23,7 +23,6 @@ const routes: Routes = [
   {path: 'update-city/:id', component: CityFormComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'searchbar', component: SearchBarComponent}
    
 ];
 

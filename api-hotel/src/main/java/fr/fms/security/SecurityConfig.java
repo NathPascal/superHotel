@@ -55,10 +55,6 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
 
-                //Pour le test
-                //.authorizeHttpRequests(ahr -> ahr.requestMatchers("/login").permitAll())
-                //.authorizeHttpRequests(ahr -> ahr.requestMatchers("/infos").authenticated())
-
                 .oauth2ResourceServer(ors -> ors.jwt(Customizer.withDefaults()))
                 .build();
     }
