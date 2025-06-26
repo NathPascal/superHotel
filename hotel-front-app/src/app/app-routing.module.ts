@@ -9,8 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-
-
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/hotels', pathMatch: 'full' },
@@ -23,6 +22,7 @@ const routes: Routes = [
   {path: 'update-city/:id', component: CityFormComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
+  {path: 'dashboard', component: DashboardComponent}
    
 ];
 

@@ -9,11 +9,10 @@ export class Hotel {
     rooms : number;
     price : number;
     imageUrl : string;
+    comment?: string | null;
     cityId : number | null;
-
-    
-  
-    constructor(id:number,name:string,phone:string,address:string,stars:number,rooms:number,price:number,imageUrl:string, cityId: number){
+      
+    constructor(id:number,name:string,phone:string,address:string,stars:number,rooms:number,price:number,imageUrl:string, cityId: number, comment: string | null = null) {
       this.id = id;
       this.name = name
       this.phone = phone;
@@ -23,5 +22,6 @@ export class Hotel {
       this.price = price;
       this.imageUrl = imageUrl;
       this.cityId = cityId;
+      this.comment = comment;
       }
     }

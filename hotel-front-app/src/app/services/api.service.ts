@@ -22,6 +22,11 @@ export class ApiService {
     return this.http.get<Hotel>(`${environment.host}/hotels/${id}`);
   }
 
+  // Récupère un commentaire par ID
+  public getCommentById(id: number): Observable<string> {
+    return this.http.get<string>(`${environment.host}/hotels/${id}/ai-suggest`);
+  }
+
   //ajout d'un nouvel hôtel
   public addHotel(hotel: Hotel): Observable<Hotel> {
     return this.http.post<Hotel>(environment.host + "/hotels", hotel);

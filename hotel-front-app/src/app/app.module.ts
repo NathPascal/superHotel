@@ -13,6 +13,7 @@ import { CityFormComponent } from './components/city-form/city-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     CityFormComponent,
     LoginComponent,
     LogoutComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    DashboardComponent
    
     
   ],
