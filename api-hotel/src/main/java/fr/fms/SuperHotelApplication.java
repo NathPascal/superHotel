@@ -18,17 +18,17 @@ import java.util.List;
 @SpringBootApplication
 public class SuperHotelApplication implements CommandLineRunner {
 
-//	@Autowired
-//	private HotelRepository hotelRepository;
-//
-//	@Autowired
-//	private CityRepository cityRepository;
+	@Autowired
+	private HotelRepository hotelRepository;
 
-	//@Autowired
-	//private UserRepository userRepository;
+	@Autowired
+	private CityRepository cityRepository;
 
-	//@Autowired
-	//private PasswordEncoder passwordEncoder;
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SuperHotelApplication.class, args);
@@ -36,19 +36,20 @@ public class SuperHotelApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception{
+		userRepository.save(new User(null, "nath", passwordEncoder.encode("12345"), true, true));
+		userRepository.save(new User(null, "toto", passwordEncoder.encode("12345"), true, false));
+		userRepository.save(new User(null, "lulu", passwordEncoder.encode("12345"), true, false));
 
-//		userRepository.save(new User(null, "nath", passwordEncoder.encode("12345"), true));
-//
-//		City paris = new City(null, "Paris", null);
-//		City toulouse = new City(null, "Toulouse", null);
-//		cityRepository.saveAll(List.of(paris, toulouse));
-//
-//		hotelRepository.save(new Hotel(null, "Première classe", "0622558140", "rue des puces de lit", 0, 12, 40,"https://ac-franchise.com/wp-content/uploads/2017/04/logo-franchise-premiere-classe-1.jpg", paris ));
-//		hotelRepository.save(new Hotel(null, "Hotel Dream","051020101","rue de la mer",4,20,150,"https://i.pinimg.com/originals/20/07/d6/2007d6dd4ca8f4b527d19c7baaefab7e.jpg", toulouse));
-//
-//		cityRepository.save(new City(null, "Lyon", null));
-//
-//		System.out.println("Données de test insérées avec succès !");
+		City paris = new City(null, "Paris", null);
+		City toulouse = new City(null, "Toulouse", null);
+		cityRepository.saveAll(List.of(paris, toulouse));
+
+		hotelRepository.save(new Hotel(null, "Première classe", "0622558140", "rue des puces de lit", 0, 12, 40,"https://ac-franchise.com/wp-content/uploads/2017/04/logo-franchise-premiere-classe-1.jpg", paris ));
+		hotelRepository.save(new Hotel(null, "Hotel Dream","051020101","rue de la mer",4,20,150,"https://i.pinimg.com/originals/20/07/d6/2007d6dd4ca8f4b527d19c7baaefab7e.jpg", toulouse));
+
+		cityRepository.save(new City(null, "Lyon", null));
+
+		System.out.println("Données de test insérées avec succès !");
 	}
 
 }

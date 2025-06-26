@@ -24,6 +24,6 @@ public class User implements Serializable {
     private Long id;
     private String username;
     private String password;
-    boolean active;
-
+    private boolean active;
+    private boolean isAdmin;
 }
