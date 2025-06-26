@@ -16,6 +16,12 @@ import java.io.Serializable;
 @Table(name = "T_user")
 public class User implements Serializable {
 
+    public User(String string, String encode, String password2, boolean active2) {
+        this.username = string;
+        this.password = encode;
+        this.active = active2;
+    }
+    
     @Serial
     private static final long serialVersionUID = 1L;
 

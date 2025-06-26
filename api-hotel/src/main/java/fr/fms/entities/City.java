@@ -30,4 +30,8 @@ public class City implements Serializable {
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Hotel> hotels;
+
+    public City(String name) {
+        this.name = name;
+    }
 }
