@@ -3,6 +3,8 @@ package fr.fms;
 import ch.qos.logback.core.encoder.EchoEncoder;
 import fr.fms.entities.*;
 import fr.fms.repository.*;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -38,62 +40,45 @@ public class SuperHotelApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws Exception{
+	public void run(String... args) throws Exception {
+		initData();
+	}
 
-		userRepository.save(new User(null, "nath", passwordEncoder.encode("12345"), true));
+	@Transactional
+	public void initData() {
+		// Création de villes
+		City paris = new City("Paris");
+		City lyon = new City("Lyon");
+		City marseille = new City("Marseille");
+		cityRepository.saveAll(List.of(paris, lyon, marseille));
 
-		City paris = new City(null, "Paris", null);
-		City toulouse = new City(null, "Toulouse", null);
-		cityRepository.saveAll(List.of(paris, toulouse));
+		// Création d'hôtels
+		Hotel hotel1 = new Hotel("Hôtel Parisien", "Un hôtel de luxe
+				" situé au cœur de Paris.", 4.5, 150.0, "https://example.com/hotel1.jpg", paris);
+		Hotel hotel2 = new Hotel("Hôtel Lyonnais", "Un hôtel confortable à
+				" Lyon.", 4.0, 120.0, "https://example.com/hotel2.jpg", lyon);
+		Hotel hotel3 = new Hotel("Hôtel Marseillais", "Un hôtel
+				" avec vue sur la mer à Marseille.", 4.2, 130.0, "https://example.com/hotel3.jpg", marseille);
+		hotelRepository.saveAll(List.of(hotel1, hotel2, hotel3));
 
-		hotelRepository.save(new Hotel(null, "Première classe", "0622558140", "rue des puces de lit", 0, 12, 40,"https://ac-franchise.com/wp-content/uploads/2017/04/logo-franchise-premiere-classe-1.jpg", paris ));
-		hotelRepository.save(new Hotel(null, "Hotel Dream","051020101","rue de la mer",4,20,150,"https://i.pinimg.com/originals/20/07/d6/2007d6dd4ca8f4b527d19c7baaefab7e.jpg", toulouse));
+		// Création d'utilisateurs
+		User user1 = new User("user1", passwordEncoder.encode("password1"), "user1@example.com", true);
+		User user2 = new User("user2", passwordEncoder.encode("password2"), "user2@example.com", true);
+		User user3 = new User("user3", passwordEncoder.encode("password3"), "user3@example.com");
+		userRepository.saveAll(List.of(user1, user2, user3));
 
-		cityRepository.save(new City(null, "Lyon", null));
+		// Création d'avis
+		Avis avis1 = new Avis(5L, "Excellent séjour !", hotel1);
+		Avis avis2 = new Avis(4L, "Très bon hôtel, mais un peu cher.", hotel2);
+		Avis avis3 = new Avis(3L, "Correct, mais rien d'exceptionnel.", hotel3);
+		avisRepository.saveAll(List.of(avis1, avis2, avis3));
 
+		// Création de réservations
+		Reservation reservation1 = new Reservation(user1, hotel1, 2, LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(3), avis1);
+		Reservation reservation2 = new Reservation(user2, hotel2, 1, LocalDateTime.now().plusDays(2), LocalDateTime.now().plusDays(4), avis2);
+		Reservation reservation3 = new Reservation(user3, hotel3, 3, LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(5), avis3);
+		reservationRepository.saveAll(List.of(reservation1, reservation2, reservation3));
+	
 		System.out.println("Données de test insérées avec succès !");
 	}
-
-	public  void initData(){
-
-		User rachid = new User(null, "rachid", passwordEncoder.encode("fms2025"), true);
-		userRepository.save(rachid);
-		City tarbes = new City(null, "tarbes", null);
-		City ibos = new City(null, "Ibos", null);
-		Reservation reservation = new Reservation();
-		reservation.setUser(rachid);
-		reservation.setHotel(new Hotel(null, "Première classe", "0622558140", "rue des puces de lit", 0, 12, 40,"https://ac-franchise.com/wp-content/uploads/2017/04/logo-franchise-premiere-classe-1.jpg", tarbes ));
-		reservation.setNombreDePersonne(2);
-		reservation.setDateArrive(LocalDateTime.of(2025, 6, 30, 15, 0));
-		reservation.setDateDepart(LocalDateTime.of(2025, 7, 3, 11, 0));
-		reservationRepository.save(reservation);
-
-		Reservation reservation2 = new Reservation();
-		reservation.setUser(rachid);
-		reservation.setHotel(new Hotel(null, "Deuxieme classe", "0622558140", "rue des puces de lit", 0, 12, 40,"https://ac-franchise.com/wp-content/uploads/2017/04/logo-franchise-premiere-classe-1.jpg", tarbes ));
-		reservation.setNombreDePersonne(2);
-		reservation.setDateArrive(LocalDateTime.of(2025, 6, 30, 15, 0));
-		reservation.setDateDepart(LocalDateTime.of(2025, 7, 3, 11, 0));
-		reservationRepository.save(reservation);
-
-		Avis avis = new Avis();
-		avis.setNote(4L);
-		avis.setText("Super séjour, personnel accueillant !");
-		avis.setReservation(reservation);
-		avisRepository.save(avis);
-
-		Avis avis1 = new Avis();
-		avis.setNote(4L);
-		avis.setText("Séjour agréable, personnel souriant !");
-		avis.setReservation(reservation);
-		avisRepository.save(avis);
-
-		Avis avis2 = new Avis();
-		avis.setNote(3L);
-		avis.setText("Séjour plaisant, mais apr contre il manque la climatisation !");
-		avis.setReservation(reservation);
-		avisRepository.save(avis);
-
-	}
-
 }

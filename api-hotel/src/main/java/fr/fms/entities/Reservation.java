@@ -21,12 +21,16 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
+    @ManyToOne @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne(cascade = CascadeType.PERSIST) @JoinColumn(name = "hotel_id")
     private Hotel  hotel;
+
     private int nombreDePersonne;
     private LocalDateTime dateArrive;
     private LocalDateTime dateDepart;
-    @OneToOne
-    @JoinColumn(name = "avis_id")
+
+    @OneToOne @JoinColumn(name = "avis_id")
     private Avis avis;
 }

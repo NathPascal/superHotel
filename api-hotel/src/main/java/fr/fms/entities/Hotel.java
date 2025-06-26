@@ -32,7 +32,7 @@ public class Hotel implements Serializable{
         private double price;
         private String imageUrl;
 
-        @ManyToOne
+        @ManyToOne(cascade = CascadeType.MERGE)
         @JoinColumn(name = "city_id")
         @JsonBackReference
         private City city;
