@@ -14,6 +14,12 @@ import lombok.*;
 @Table(name = "T_Avis")
 public class Avis {
 
+    public Avis(long l, String string, Reservation reservation1) {
+        this.note = l;
+        this.text = string;
+        this.reservation = reservation1;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

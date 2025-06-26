@@ -16,6 +16,13 @@ import java.time.LocalDateTime;
 @Setter
 @Table(name = "t_reservation")
 public class Reservation {
+    public Reservation(User user1, Hotel hotel1, int i, LocalDateTime plusDays, LocalDateTime plusDays2) {
+        this.user = user1;
+        this.hotel = hotel1;
+        this.nombreDePersonne = i;
+        this.dateArrive = plusDays;
+        this.dateDepart = plusDays2;        
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +31,7 @@ public class Reservation {
     @ManyToOne @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.PERSIST) @JoinColumn(name = "hotel_id")
+    @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "hotel_id")
     private Hotel  hotel;
 
     private int nombreDePersonne;

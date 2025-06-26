@@ -17,6 +17,15 @@ import java.io.Serializable;
 @Table(name = "T_hotel")
 public class Hotel implements Serializable{
 
+        public Hotel(String string, String string2, double d, double e, String string3, City paris) {
+                this.name = string;
+                this.address = string2;
+                this.price = d;
+                this.stars = (int) e;
+                this.imageUrl = string3;
+                this.city = paris;
+        }
+
         @Serial
         private static final long serialVersionUID = 1L;
 
