@@ -35,6 +35,12 @@ public class HotelController {
         return ResponseEntity.ok(hotel);
     }
 
+    @GetMapping("/hotels/{id}/ai-suggest")
+    public String getAISuggestionByHotelId(@PathVariable Long id) {
+        String aiSuggestion = implHotelService.getHotelComment(id);
+        return aiSuggestion;
+    }
+
     @PostMapping("/hotels")
     public ResponseEntity<HotelDTO> addHotel(@RequestBody HotelDTO hotelDTO) {
         HotelDTO createdHotel = implHotelService.addHotel(hotelDTO);
