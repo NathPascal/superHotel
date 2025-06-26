@@ -1,0 +1,11 @@
+<p>dashboard works!</p>
+
+<div *ngFor="let hotel of hotels">
+  <h2>{{ hotel.name }}</h2>
+  <p>{{ hotel.address }}</p>
+  <p>Stars: {{ hotel.stars }}</p>
+  <p>Rooms: {{ hotel.rooms }}</p>
+  <p>Price: {{ hotel.price }} €</p>
+  <img [src]="hotel.imageUrl" alt="{{ hotel.name }}" />
+  <p *ngIf="hotel.comment">Comment: {{ hotel.comment }}</p>
+</div>

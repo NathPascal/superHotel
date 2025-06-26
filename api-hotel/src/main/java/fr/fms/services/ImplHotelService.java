@@ -26,6 +26,9 @@ public class ImplHotelService implements IHotelService{
     private CityRepository cityRepository;
 
     @Autowired
+    private final AiService aiService = null; // Assuming AiService is a Spring Bean
+
+    @Autowired
     public ImplHotelService(HotelRepository hotelRepository, CityRepository cityRepository){
         this.hotelRepository = hotelRepository;
         this.cityRepository = cityRepository;
@@ -35,6 +38,21 @@ public class ImplHotelService implements IHotelService{
     public List<HotelDTO> getHotels() throws RuntimeException{
 
         return HotelMapper.toDTOList(hotelRepository.findAll(Sort.by(Sort.Direction.ASC, "id")));
+    }
+
+    // Récupère un commentaire IA pour un hôtel via son ID
+    public String getHotelComment(Long id) {
+        logger.info("Fetching AI comment for hotel with id: {}", id);
+        Hotel hotel = hotelRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.error("Hotel not found with id: {}", id);
+                    return new HotelNotFoundException(id);
+                });
+
+        String prompt = String.format("Donne moi un commentaire/suggestion d'amélioration sur l'hôtel %s situé à %s", hotel.getName(), hotel.getCity().getName());
+        String aiComment = aiService.chat(prompt);
+        logger.info("AI comment for hotel {}: {}", hotel.getName(), aiComment);
+        return aiComment;
     }
 
     // Récupère un hôtel via son id
