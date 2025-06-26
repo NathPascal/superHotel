@@ -25,7 +25,8 @@ public class ImplHotelService implements IHotelService{
     private final HotelRepository hotelRepository;
     private CityRepository cityRepository;
 
-    private final AiService aiService;
+    @Autowired
+    private final AiService aiService = null; // Assuming AiService is a Spring Bean
 
     @Autowired
     public ImplHotelService(HotelRepository hotelRepository, CityRepository cityRepository){
